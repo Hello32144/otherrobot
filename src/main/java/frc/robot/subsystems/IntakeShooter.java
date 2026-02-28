@@ -13,19 +13,19 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeShooter extends SubsystemBase {
-    private SparkMax indexer = new SparkMax(1, MotorType.kBrushless);
-    private SparkMax intakeShootMotor = new SparkMax(2, MotorType.kBrushless);
+    private SparkMax m_indexer = new SparkMax(1, MotorType.kBrushless);
+    private SparkMax m_intakeShootMotor = new SparkMax(2, MotorType.kBrushless);
 
-    private SparkMaxConfig indexConfig = new SparkMaxConfig();
-    private SparkMaxConfig motorConfig = new SparkMaxConfig();
+    private SparkMaxConfig m_indexConfig = new SparkMaxConfig();
+    private SparkMaxConfig m_motorConfig = new SparkMaxConfig();
 
-    public boolean indexerRunning = false;
+    public boolean m_indexerRunning = false;
     public boolean motorRunning = false;
      
     /** Creates a new IntakeShooter. */
     public IntakeShooter() {
-        indexer.configure(indexConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
-        intakeShootMotor.configure(motorConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+        m_indexer.configure(m_indexConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+        m_intakeShootMotor.configure(m_motorConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
     }
 
     @Override
@@ -35,29 +35,29 @@ public class IntakeShooter extends SubsystemBase {
 
     public void intakeShoot(double speed) {
         motorRunning = true;
-        intakeShootMotor.set(speed);
+        m_intakeShootMotor.set(speed);
     }
 
     public void stopIntakeShoot() {
         motorRunning = false;
-        intakeShootMotor.set(0);
+        m_intakeShootMotor.set(0);
     }
 
     public double intakeSpeed() {
-        return intakeShootMotor.getEncoder().getVelocity();
+        return m_intakeShootMotor.getEncoder().getVelocity();
     }
 
     public void index(double speed) {
-        indexerRunning = true;
-        indexer.set(speed);
+        m_indexerRunning = true;
+        m_indexer.set(speed);
     }
 
     public void stopIndex() {
-        indexerRunning = false;
-        indexer.set(0);
+        m_indexerRunning = false;
+        m_indexer.set(0);
     }
 
     public double indexSpeed() {
-        return indexer.getEncoder().getVelocity();
+        return m_indexer.getEncoder().getVelocity();
     }
 }
