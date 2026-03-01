@@ -10,6 +10,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.swerve.SwerveModule;
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkMax;
@@ -32,18 +33,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import pabeles.concurrency.ConcurrencyOps.Reset;
 
 public class drive extends SubsystemBase {
+private final Pigeon2 m_gyro = new Pigeon2(0);//can change gyro later
 
+private static driveSwerve m_Left_Front_Module= new driveSwerve(3, 4, 5);
+private static driveSwerve m_Left_Back_Module = new driveSwerve(6, 7, 8);
+private static driveSwerve m_Right_Front_Module = new driveSwerve(9, 10, 11);
+private static driveSwerve m_Right_Back_Module = new driveSwerve(12, 13, 14);
 
+private final SwerveDriveKinematics m_Kinematics = new SwerveDriveKinematics(drivevalues.m_Left_Front, drivevalues.m_Left_Back,drivevalues.m_Right_Front,drivevalues.m_Right_Back);
 
-  ChassisSpeeds m_ChassisSpeeds = new ChassisSpeeds(0, 3, 3); 
-  public SwerveDriveKinematics m_DriveKinematics = new SwerveDriveKinematics(drivevalues.m_Left_back, drivevalues.m_Left_Front, drivevalues.m_Right_Back, drivevalues.m_Right_Front);
-  
-  private PIDController motor_controller = new PIDController(0, 1, 0);
-  private Pigeon2 m_gyro = new Pigeon2(0);
-  private DifferentialDriveOdometry drive = new DifferentialDriveOdometry(null, null, null);
+public drive() {
 
-  public drive() {
-=
   }
 
   @Override

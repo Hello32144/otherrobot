@@ -19,7 +19,7 @@ public static final int m_Right_Back_Id= 12;
 public static final int m_Right_Back_Steer_Id=13;
 public static final int m_Right_Back_Encoder = 14;
 
-public static Translation2d m_Left_back = new Translation2d(1,1);
+public static Translation2d m_Left_Nack = new Translation2d(1,1);
 public static Translation2d m_Left_Front = new Translation2d(1,1);
 
 public static Translation2d m_Right_Back = new Translation2d(1,1);
