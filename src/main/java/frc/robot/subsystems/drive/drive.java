@@ -4,36 +4,21 @@
 
 package frc.robot.subsystems.drive;
 
-import static edu.wpi.first.units.Units.Rotation;
 
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.hardware.CANcoder;
+
 import com.ctre.phoenix6.hardware.Pigeon2;
-import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.swerve.SwerveModule;
-import com.fasterxml.jackson.databind.node.POJONode;
-import com.revrobotics.PersistMode;
-import com.revrobotics.ResetMode;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.config.SparkFlexConfig;
-import com.revrobotics.spark.config.SparkMaxConfig;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
+
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.math.kinematics.Kinematics;
+
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import pabeles.concurrency.ConcurrencyOps.Reset;
+
 /**
  * A simple swerveDrive system that has not been tested and needs values update
  * 
