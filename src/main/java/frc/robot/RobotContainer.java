@@ -43,11 +43,19 @@ public class RobotContainer {
    * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
    * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
+   * 
    */
-  private void configureBindings() {
-    double y = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1);
-    double x = MathUtil.applyDeadband(m_driverController.getRightX(), 0.1);
+  /**multiply max velocities to the joystick values so it doesnt tweak
+   * @author william ding for the command for drive
+  */
 
+  private void configureBindings() {
+    m_drive.run(()->{
+    double y = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1);
+    double x = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1);
+    double Rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1);
+    m_drive.driveRobot(x, y, Rotation);
+  });
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));

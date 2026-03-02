@@ -1,7 +1,14 @@
 package frc.robot.subsystems.drive;
 
-import edu.wpi.first.math.geometry.Translation2d;
+import static edu.wpi.first.units.Units.Inches;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.units.measure.Distance;
+/**
+ * A simple swerveDrive system that has not been tested and needs values update
+ * 
+ * @author William Ding
+ */
 public final class drivevalues {
 public static final int m_Left_Back_Id= 3;
 public static final int m_Left_Steer_Id=4;
@@ -19,10 +26,12 @@ public static final int m_Right_Back_Id= 12;
 public static final int m_Right_Back_Steer_Id=13;
 public static final int m_Right_Back_Encoder = 14;
 
-public static Translation2d m_Left_Nack = new Translation2d(1,1);
+public static Translation2d m_Left_Back = new Translation2d(1,1);
 public static Translation2d m_Left_Front = new Translation2d(1,1);
 
 public static Translation2d m_Right_Back = new Translation2d(1,1);
 public static Translation2d m_Right_Front = new Translation2d(1,1);
 
+public static Distance m_wheel_diameter = Inches.of(2); //placeholder value
+public static double gear_ratio = 3; //placeholder value
 }
