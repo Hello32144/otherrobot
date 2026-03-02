@@ -3,6 +3,28 @@ plugins {
     id "edu.wpi.first.GradleRIO" version "2026.2.1"
 }
 
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/LittletonRobotics/AdvantageKit")
+        
+        // This forces Gradle to send the password correctly
+        authentication {
+            basic(BasicAuthentication)
+        }
+        
+        credentials {
+            username = "LittletonRobotics"
+            password = "ghp_gh7vjBy9794Naxl77J66e2v5175651756517"
+        }
+        
+        metadataSources {
+            mavenPom()
+            artifact()
+        }
+    }
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -73,6 +95,7 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    annotationProcessor "org.littletonrobotics.akevents:whale-wpilib:2026.+"
 }
 
 test {
