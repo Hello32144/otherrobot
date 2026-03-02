@@ -41,11 +41,14 @@ import pabeles.concurrency.ConcurrencyOps.Reset;
  */
 public class drive extends SubsystemBase {
   private final Pigeon2 m_gyro = new Pigeon2(0);// can change gyro later
-  private static driveSwerve m_Left_Front_Module = new driveSwerve(3, 4, 5);
-  private static driveSwerve m_Left_Back_Module = new driveSwerve(6, 7, 8);
-  private static driveSwerve m_Right_Front_Module = new driveSwerve(9, 10, 11);
-  private static driveSwerve m_Right_Back_Module = new driveSwerve(12, 13, 14);
+
+  private  driveSwerve m_Left_Front_Module = new driveSwerve(6, 7, 8);
+  private driveSwerve m_Left_Back_Module = new driveSwerve(3, 4, 5);
+  private  driveSwerve m_Right_Front_Module = new driveSwerve(9, 10, 11);
+  private driveSwerve m_Right_Back_Module = new driveSwerve(12, 13, 14);
+
   Pose2d m_Pose = new Pose2d();
+
   private final SwerveDriveKinematics m_Kinematics = new SwerveDriveKinematics(drivevalues.m_Left_Front,
       drivevalues.m_Left_Back, drivevalues.m_Right_Front, drivevalues.m_Right_Back);
 
@@ -63,12 +66,13 @@ public class drive extends SubsystemBase {
   }
 
   // if we have a gyro then we can use this constructor
+    SwerveDriveOdometry m_Odometry = new SwerveDriveOdometry(m_Kinematics, m_gyro.getRotation2d(),
+      new SwerveModulePosition[] { m_Left_Front_Module.getPosition(),
+          m_Left_Back_Module.getPosition(), m_Right_Front_Module.getPosition(), m_Right_Back_Module.getPosition() });
+
 public Pose2d getPose(){
   return m_Odometry.getPoseMeters();
 }
-  SwerveDriveOdometry m_Odometry = new SwerveDriveOdometry(m_Kinematics, m_gyro.getRotation2d(),
-      new SwerveModulePosition[] { m_Left_Front_Module.getPosition(),
-          m_Left_Back_Module.getPosition(), m_Right_Front_Module.getPosition(), m_Right_Back_Module.getPosition() });
 
   @Override
   public void periodic() {

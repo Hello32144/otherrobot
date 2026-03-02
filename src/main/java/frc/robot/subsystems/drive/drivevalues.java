@@ -4,11 +4,7 @@ import static edu.wpi.first.units.Units.Inches;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.units.measure.Distance;
-/**
- * A simple swerveDrive system that has not been tested and needs values update
- * 
- * @author William Ding
- */
+
 public final class drivevalues {
 public static final int m_Left_Back_Id= 3;
 public static final int m_Left_Steer_Id=4;

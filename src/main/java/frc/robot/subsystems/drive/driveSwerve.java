@@ -43,33 +43,39 @@ public class driveSwerve extends SubsystemBase {
         m_Encoder_Configure = new CANcoderConfiguration();
 
         m_Drive_Motor_Configure.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-        m_Drive_Motor_Configure.CurrentLimits.SupplyCurrentLimit = 30;
         m_Drive_Motor_Configure.Feedback.SensorToMechanismRatio = 0;// adjust later to real values
+        m_Drive_Motor_Configure.CurrentLimits.SupplyCurrentLimit = 30;
+        m_Drive_Motor_Configure.CurrentLimits.SupplyCurrentLimitEnable = true;
 
-        m_Drive_Motor_Configure.CurrentLimits.StatorCurrentLimitEnable = true;
+
+
         m_Drive_Motor_Configure.CurrentLimits.StatorCurrentLimit = 10;
         m_Drive_Motor_Configure.CurrentLimits.StatorCurrentLimitEnable = true;
+
         m_Drive_Motor_Configure.ClosedLoopGeneral.ContinuousWrap = true;
 
         m_Steer_Motor_Configure.MotorOutput.NeutralMode = NeutralModeValue.Brake;
         m_Steer_Motor_Configure.Feedback.RotorToSensorRatio = 1;// adjust later to real values
+
         m_Steer_Motor_Configure.CurrentLimits.SupplyCurrentLimit = 15;
         m_Steer_Motor_Configure.CurrentLimits.SupplyCurrentLimitEnable = true;
+
         m_Steer_Motor_Configure.CurrentLimits.StatorCurrentLimit = 10;
         m_Steer_Motor_Configure.CurrentLimits.StatorCurrentLimitEnable = true;
+
         m_Steer_Motor_Configure.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.FusedCANcoder;
         m_Steer_Motor_Configure.Feedback.FeedbackRemoteSensorID = m_Encoder_Id;
         m_Steer_Motor_Configure.ClosedLoopGeneral.ContinuousWrap = true;
 
-        m_Encoder_Configure.MagnetSensor.MagnetOffset = 0;
+        m_Encoder_Configure.MagnetSensor.MagnetOffset = 0;// ADJJUST THIS
         m_Encoder_Configure.MagnetSensor.SensorDirection = SensorDirectionValue.Clockwise_Positive;
 
         m_Encoder.getConfigurator().apply(m_Encoder_Configure);
         m_Drive_Motor.getConfigurator().apply(m_Drive_Motor_Configure);
         m_Steer_Motor.getConfigurator().apply(m_Steer_Motor_Configure);
-        m_Drive_PID.enableContinuousInput(-0.5, 0.5);
-        m_Steer_PID.enableContinuousInput(-0.5, 0.5);
 
+        m_Steer_PID.enableContinuousInput(-0.5, 0.5);
+        m_Drive_PID.enableContinuousInput(-0.5, 0.5);
     }
 
     public SwerveModuleState getState() {
@@ -91,9 +97,10 @@ public class driveSwerve extends SubsystemBase {
         state.optimize(getState().angle);
         double steer_speed = m_Steer_PID.calculate(m_Encoder.getAbsolutePosition().getValueAsDouble(),
                 state.angle.getRotations());
-        double drive_speed = m_Drive_PID.calculate(m_Drive_Motor.getVelocity().getValueAsDouble(),
-                state.speedMetersPerSecond);
-
+        double state_rps = (state.speedMetersPerSecond / (drivevalues.m_wheel_diameter.in(Meters) * Math.PI)
+                * drivevalues.gear_ratio);
+                
+        double drive_speed = m_Drive_PID.calculate(m_Drive_Motor.getVelocity().getValueAsDouble(),state_rps);
         m_Drive_Motor.set(drive_speed);
         m_Steer_Motor.set(steer_speed);
     }
