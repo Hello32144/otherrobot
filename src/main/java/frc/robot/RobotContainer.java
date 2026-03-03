@@ -63,19 +63,12 @@ public class RobotContainer {
   private void configureBindings() {
     
     m_drive.setDefaultCommand(m_drive.run(() -> {
-        double x = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1);
-        double y = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1);
-        double rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1);
+        double x = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1)*12;
+        double y = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1)*12;
+        double rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1)*12;
         m_drive.driveRobot(x, y, rotation);
     }));
-  
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 
   /**
