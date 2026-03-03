@@ -28,13 +28,14 @@ public class driveIOSim implements driveModuleIO {
     private double m_Steer_Volts =0;
     private double m_target_angle =0;
     private double m_target_speed =0;
-    private final PIDController m_Steer_PID = new PIDController(5.0, 0, 0);
+    private final PIDController m_Steer_PID = new PIDController(2, 0, 0);
     private final PIDController m_Drive_PID = new PIDController(0.5, 0, 0);
 
     public driveIOSim() {
-        drive_Sim = new DCMotorSim(LinearSystemId.createDCMotorSystem(0.1, 0.01), DCMotor.getKrakenX60(1));
-        steer_Sim = new DCMotorSim(LinearSystemId.createDCMotorSystem(0.1, 0.01), DCMotor.getNEO(1));
+        drive_Sim = new DCMotorSim(LinearSystemId.createDCMotorSystem(0.1, 0.01), DCMotor.getKrakenX60(4));
+        steer_Sim = new DCMotorSim(LinearSystemId.createDCMotorSystem(0.1, 0.01), DCMotor.getNEO(4));
         m_Steer_PID.enableContinuousInput(-0.5, 0.5);
+        m_Steer_PID.setTolerance(0.01);
     }
 
     @Override

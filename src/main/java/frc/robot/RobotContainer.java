@@ -12,7 +12,12 @@ import frc.robot.subsystems.drive.drive;
 import frc.robot.subsystems.drive.driveIO;
 import frc.robot.subsystems.drive.driveIOSim;
 import frc.robot.subsystems.drive.driveModuleIO;
+
+import static edu.wpi.first.units.Units.Rotation;
+
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -63,11 +68,14 @@ public class RobotContainer {
   private void configureBindings() {
     
     m_drive.setDefaultCommand(m_drive.run(() -> {
-        double x = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1);
+        double x = MathUtil.applyDeadband(m_driverController.getLeftX(), 0.1);
         double y = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1);
-        double rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1);
-        m_drive.driveRobotIO(x*12, y*12, rotation*12);
+        double rotation = MathUtil.applyDeadband(m_driverController.getRightX(), 0.1);
+        m_drive.driveRobotIO(x*12, y*12, rotation*180);
     }));
+    m_driverController.a().onTrue(m_drive.runOnce(()->{m_drive.m_gyro.setYaw(0);}
+    ));
+  }
 
 
   /**
@@ -77,4 +85,3 @@ public class RobotContainer {
    */
 
   }
-}

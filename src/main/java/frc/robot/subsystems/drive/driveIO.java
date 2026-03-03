@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems.drive;
+
 /**
  * @author willidng
  */
@@ -10,6 +11,7 @@ import org.littletonrobotics.junction.Logger;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -31,8 +33,10 @@ public class driveIO extends SubsystemBase {
   private driveLoggerAutoLogged front_right_inputs = new driveLoggerAutoLogged();
   private driveLoggerAutoLogged back_right_inputs = new driveLoggerAutoLogged();
   private driveLoggerAutoLogged back_left_inputs = new driveLoggerAutoLogged();
-
-  private final Pigeon2 m_gyro = new Pigeon2(1);
+  private final PIDController m_Steer_PID = new PIDController(2, 0, 0);
+  private final PIDController m_Drive_PID = new PIDController(0.5, 0, 0);
+  private final PIDController m_Heading_PID = new PIDController(0.5, 0, 0);
+  public final Pigeon2 m_gyro = new Pigeon2(1);
 
   private Pose2d m_Pose = new Pose2d();
   private SwerveDriveOdometry m_Odometry;
@@ -56,12 +60,26 @@ public class driveIO extends SubsystemBase {
     });
   }
 
+  public double last_heading=0;
+
   public void driveRobotIO(double x, double y, double Rotation) {
+    if (Math.abs(Rotation) > 0.1){
+      last_heading = Rotation;
+      m_gyro.setYaw(last_heading);
+    }
+    Logger.recordOutput("Least Heading", last_heading);
     Logger.recordOutput("X", x);
     Logger.recordOutput("y", y);
     Logger.recordOutput("Rotation", Rotation);
     ChassisSpeeds speeds = new ChassisSpeeds(x, y, Rotation);
     SwerveModuleState[] neededPositions = m_Kinematics.toSwerveModuleStates(speeds);
+    neededPositions[0] = SwerveModuleState.optimize(neededPositions[0], front_left_inputs.drive_Direction[0]);
+    neededPositions[1] = SwerveModuleState.optimize(neededPositions[1], front_right_inputs.drive_Direction[0]);
+
+    neededPositions[2] = SwerveModuleState.optimize(neededPositions[2], back_left_inputs.drive_Direction[0]);
+
+    neededPositions[3] = SwerveModuleState.optimize(neededPositions[3], back_right_inputs.drive_Direction[0]);
+
     front_left_io.setDriveVoltage(neededPositions[0].speedMetersPerSecond);
     front_right_io.setDriveVoltage(neededPositions[1].speedMetersPerSecond);
     back_left_io.setDriveVoltage(neededPositions[2].speedMetersPerSecond);
@@ -70,10 +88,27 @@ public class driveIO extends SubsystemBase {
     front_left_io.setSteerVoltage(neededPositions[0].angle.getRotations());
     front_right_io.setSteerVoltage(neededPositions[1].angle.getRotations());
 
-   back_left_io.setSteerVoltage(neededPositions[2].angle.getRotations());
+    back_left_io.setSteerVoltage(neededPositions[2].angle.getRotations());
 
     back_right_io.setSteerVoltage(neededPositions[3].angle.getRotations());
 
+  }
+
+  public void driveRobotToPose(Pose2d target_pose) {
+    Pose2d pose = m_Odometry.getPoseMeters();
+
+    double get_to_x = m_Drive_PID.calculate(pose.getX(), target_pose.getX());
+    double get_to_y = m_Drive_PID.calculate(pose.getY(), target_pose.getY());
+
+    driveRobotIO(get_to_x, get_to_y, 0);
+  }
+  public Boolean isAtPose(Pose2d target_pose){
+    if (m_Odometry.getPoseMeters() == target_pose){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   @Override
