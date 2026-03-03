@@ -9,11 +9,13 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.drive.DriveIO.DriveIOInputs;
+
 import com.ctre.phoenix6.hardware.Pigeon2;
 
 public class Drive extends SubsystemBase {
   // Uses the class generated from DriveIO.java
-  private final DriveIOInputsAutoLogged inputs = new DriveIOInputsAutoLogged();
+  private final DriveIOInputs inputs = new DriveIOInputs();
   private final Pigeon2 m_gyro = new Pigeon2(0);
 
   private final DriveSwerve m_Left_Front_Module = new DriveSwerve(6, 7, 8);
@@ -74,12 +76,12 @@ public class Drive extends SubsystemBase {
 public void periodic() {
     updateInputs(); 
 
-    Logger.processInputs("Drive", inputs);
+    //Logger.processInputs("Drive", inputs);
 
 
     m_Odometry.update(Rotation2d.fromRadians(inputs.gyroYawRad), inputs.modulePositions);
 
-    Logger.recordOutput("Drive/Pose", m_Odometry.getPoseMeters());
-    Logger.recordOutput("Drive/ActualStates", inputs.moduleStates); 
+    //Logger.recordOutput("Drive/Pose", m_Odometry.getPoseMeters());
+    //Logger.recordOutput("Drive/ActualStates", inputs.moduleStates); 
 }
 }

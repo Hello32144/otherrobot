@@ -14,11 +14,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.drive.ModuleIO.ModuleIOInputs;
 
 public class DriveSwerve extends SubsystemBase {
     
     // Uses the class generated from ModuleIO.java
-    private final ModuleIOInputsAutoLogged inputs = new ModuleIOInputsAutoLogged();
+    private final ModuleIOInputs inputs = new ModuleIOInputs();
     private final String moduleName;
 
     private TalonFX m_Drive_Motor;
@@ -96,7 +97,7 @@ public class DriveSwerve extends SubsystemBase {
     @Override
     public void periodic() {
         updateInputs();
-        Logger.processInputs("Drive/" + moduleName, inputs);
+        //Logger.processInputs("Drive/" + moduleName, inputs);
         Logger.recordOutput("Drive/ActualStates/" + moduleName, getState());
     }
 }
