@@ -12,8 +12,7 @@ import frc.robot.subsystems.drive.driveModuleIO.driveLogger;
 public class driveIO extends SubsystemBase {
 private driveModuleIO io;
 private driveLoggerAutoLogged inputs = new driveLoggerAutoLogged();
-private driveLogger[] modules = new driveLogger[]{
-}
+private driveLogger[] modules = new driveLogger[]{};
   public driveIO(driveModuleIO io) {
     this.io =io;
   }
