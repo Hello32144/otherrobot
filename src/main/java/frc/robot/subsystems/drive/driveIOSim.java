@@ -8,10 +8,14 @@ import static edu.wpi.first.units.Units.Meters;
 import static edu.wpi.first.units.Units.MetersPerSecond;
 
 import org.littletonrobotics.junction.Logger;
-
+/**
+ * @author willidng
+ */
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
@@ -65,5 +69,11 @@ public class driveIOSim implements driveModuleIO {
     @Override
     public void setSteerVoltage(double volts) {
         m_Steer_Volts = volts;
+    }
+
+    @Override
+    public void setDriveVoltage(SwerveModuleState swerveModuleState, ChassisSpeeds speeds) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setDriveVoltage'");
     }
 }

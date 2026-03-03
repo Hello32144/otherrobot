@@ -8,8 +8,10 @@ import org.littletonrobotics.junction.AutoLog;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.units.measure.AngularVelocity;
 
 public interface driveModuleIO {
@@ -42,4 +44,6 @@ public interface driveModuleIO {
   public default void setSteerVoltage(double volts) {
 
   }
+
+  public void setDriveVoltage(SwerveModuleState swerveModuleState, ChassisSpeeds speeds);
 }

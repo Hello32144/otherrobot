@@ -23,9 +23,13 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+/**
+ * @author willidng
+ */
 public class driveModuleIOHardware implements driveModuleIO {
   private TalonFX m_Drive_Motor;
   private SparkMax m_Steer_Motor;
@@ -84,5 +88,11 @@ public class driveModuleIOHardware implements driveModuleIO {
     inputs.drive_Direction = new Rotation2d[] {
         Rotation2d.fromRotations(m_Encoder.getAbsolutePosition().getValueAsDouble())
     };
+  }
+
+  @Override
+  public void setDriveVoltage(SwerveModuleState swerveModuleState, ChassisSpeeds speeds) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'setDriveVoltage'");
   }
 }
