@@ -63,10 +63,10 @@ public class RobotContainer {
   private void configureBindings() {
     
     m_drive.setDefaultCommand(m_drive.run(() -> {
-        double x = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1)*12;
-        double y = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1)*12;
-        double rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1)*12;
-        m_drive.driveRobot(x, y, rotation);
+        double x = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1);
+        double y = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1);
+        double rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1);
+        m_drive.driveRobot(x*12, y*12, rotation*12);
     }));
 
   }

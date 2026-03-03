@@ -57,6 +57,9 @@ public class driveIO extends SubsystemBase {
   }
 
   public void driveRobot(double x, double y, double Rotation) {
+    Logger.recordOutput("X", x);
+    Logger.recordOutput("y", y);
+    Logger.recordOutput("Rotation", Rotation);
     ChassisSpeeds speeds = new ChassisSpeeds(x, y, Rotation);
     SwerveModuleState[] neededPositions = m_Kinematics.toSwerveModuleStates(speeds);
     front_left_io.setDriveVoltage(neededPositions[0].speedMetersPerSecond);
