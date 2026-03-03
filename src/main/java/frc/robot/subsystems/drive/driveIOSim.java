@@ -70,7 +70,7 @@ public class driveIOSim implements driveModuleIO {
 
     @Override
     public void setDriveVoltage(double volts) {
-        m_Drive_Volts = volts / (drivevalues.m_wheel_diameter * Math.PI) * drivevalues.gear_ratio;
+        m_target_speed= volts / (drivevalues.m_wheel_diameter * Math.PI) * drivevalues.gear_ratio;
     }
 
     @Override

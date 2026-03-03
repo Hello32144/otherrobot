@@ -66,11 +66,9 @@ public class RobotContainer {
         double x = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1);
         double y = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1);
         double rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1);
-        m_drive.driveRobotIO(x*1, y*1, rotation*1);
+        m_drive.driveRobotIO(x*12, y*12, rotation*12);
     }));
-    m_drive.setDefaultCommand(
-    m_drive.run(() -> { m_drive.driveRobotIO(1, 0, 0.5); })
-);}
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
