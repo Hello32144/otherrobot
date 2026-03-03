@@ -21,12 +21,10 @@ public static final int m_Right_Front_Encoder = 11;
 public static final int m_Right_Back_Id= 12;
 public static final int m_Right_Back_Steer_Id=13;
 public static final int m_Right_Back_Encoder = 14;
-
-public static Translation2d m_Left_Back = new Translation2d(0.1,0.1);
-public static Translation2d m_Left_Front = new Translation2d(0.1,0.1);
-
-public static Translation2d m_Right_Back = new Translation2d(0.1,0.1);
-public static Translation2d m_Right_Front = new Translation2d(0.1,0.1);
+public static Translation2d m_Left_Front  = new Translation2d(0.3, 0.3);
+public static Translation2d m_Right_Front = new Translation2d(0.3, -0.3);
+public static Translation2d m_Left_Back   = new Translation2d(-0.3, 0.3);
+public static Translation2d m_Right_Back  = new Translation2d(-0.3, -0.3);
 
 public static double m_wheel_diameter = 2; //placeholder value
 public static double gear_ratio = 3; //placeholder value

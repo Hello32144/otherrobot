@@ -24,8 +24,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class driveIOSim implements driveModuleIO {
     private final DCMotorSim drive_Sim;
     private final DCMotorSim steer_Sim;
-    private double m_Drive_Volts = 1;
-    private double m_Steer_Volts =1;
+    private double m_Drive_Volts = 0;
+    private double m_Steer_Volts =0;
 
     public driveIOSim() {
         drive_Sim = new DCMotorSim(LinearSystemId.createDCMotorSystem(0.1, 0.01), DCMotor.getKrakenX60(4));
@@ -71,9 +71,4 @@ public class driveIOSim implements driveModuleIO {
         m_Steer_Volts = volts;
     }
 
-    @Override
-    public void setDriveVoltage(SwerveModuleState swerveModuleState, ChassisSpeeds speeds) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setDriveVoltage'");
-    }
 }

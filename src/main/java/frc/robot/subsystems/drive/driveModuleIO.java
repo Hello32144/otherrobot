@@ -44,6 +44,4 @@ public interface driveModuleIO {
   public default void setSteerVoltage(double volts) {
 
   }
-
-  public void setDriveVoltage(SwerveModuleState swerveModuleState, ChassisSpeeds speeds);
 }

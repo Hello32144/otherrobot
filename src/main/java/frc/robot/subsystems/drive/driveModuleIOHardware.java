@@ -90,9 +90,5 @@ public class driveModuleIOHardware implements driveModuleIO {
     };
   }
 
-  @Override
-  public void setDriveVoltage(SwerveModuleState swerveModuleState, ChassisSpeeds speeds) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'setDriveVoltage'");
-  }
+
 }

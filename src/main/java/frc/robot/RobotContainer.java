@@ -62,12 +62,12 @@ public class RobotContainer {
 
   private void configureBindings() {
     
-    m_drive.setDefaultCommand(m_drive.run(()->{
-    double y = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1);
-    double x = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1);
-    double Rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1);
-    m_drive.driveRobot(x, y, Rotation);
-  }));
+    m_drive.setDefaultCommand(m_drive.run(() -> {
+        double x = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1);
+        double y = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1);
+        double rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1);
+        m_drive.driveRobot(x, y, rotation);
+    }));
   
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
