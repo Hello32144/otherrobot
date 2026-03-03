@@ -56,7 +56,7 @@ public class driveIO extends SubsystemBase {
     });
   }
 
-  public void driveRobot(double x, double y, double Rotation) {
+  public void driveRobotIO(double x, double y, double Rotation) {
     Logger.recordOutput("X", x);
     Logger.recordOutput("y", y);
     Logger.recordOutput("Rotation", Rotation);
