@@ -21,7 +21,7 @@ public class driveIOSim implements driveModuleIO {
     private final DCMotorSim drive_Sim;
     private final DCMotorSim steer_Sim;
     private double m_Drive_Volts = 1;
-    private double m_Steer_Volts = 1;
+    private double m_Steer_Volts =1;
 
     public driveIOSim() {
         drive_Sim = new DCMotorSim(LinearSystemId.createDCMotorSystem(0.1, 0.01), DCMotor.getKrakenX60(4));
@@ -33,8 +33,8 @@ public class driveIOSim implements driveModuleIO {
     public void updateInputs(driveLogger inputs) {
         drive_Sim.setInputVoltage(MathUtil.clamp(m_Drive_Volts, -12.0, 12.0));
         steer_Sim.setInputVoltage(MathUtil.clamp(m_Steer_Volts, -12.0, 12.0));
-        drive_Sim.update(0.2);
-        steer_Sim.update(0.2);
+        drive_Sim.update(0.02);
+        steer_Sim.update(0.02);
 
         inputs.m_Drive_Motor_IO_Amps = Math.abs(drive_Sim.getCurrentDrawAmps());
         inputs.m_Drive_Motor_IO_Volts = m_Drive_Volts;

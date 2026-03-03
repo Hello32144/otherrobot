@@ -6,6 +6,7 @@ package frc.robot.subsystems.drive;
 
 import org.littletonrobotics.junction.AutoLog;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -25,9 +26,10 @@ public interface driveModuleIO {
     public double m_Steer_Motor_IO_Rotations_Per_Second = 0;
 
     public double[] time = new double[]{};
-    public double[] drive_Difference = new double[]{};
-    public Rotation2d[] drive_Direction = new Rotation2d[]{};
+    public double[] drive_Difference = new double[]{0};
+    public Rotation2d[] drive_Direction = new Rotation2d[]{new Rotation2d()};
 
+    public double[] pose2d = new double[]{};
 
   }
 
