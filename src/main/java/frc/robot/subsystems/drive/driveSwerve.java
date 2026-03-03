@@ -78,7 +78,7 @@ public class driveSwerve extends SubsystemBase {
 
     public SwerveModulePosition getPosition() {
         double distance = (m_Drive_Motor.getPosition().getValueAsDouble() / drivevalues.gear_ratio)
-                * drivevalues.m_wheel_diameter.in(Meters) * Math.PI;
+                * drivevalues.m_wheel_diameter * Math.PI;
         Rotation2d angle = Rotation2d.fromRotations(m_Encoder.getAbsolutePosition().getValueAsDouble());
         SwerveModulePosition position = new SwerveModulePosition(distance, angle);
         return position;
@@ -88,7 +88,7 @@ public class driveSwerve extends SubsystemBase {
         state.optimize(getState().angle);
         double steer_speed = m_Steer_PID.calculate(m_Encoder.getAbsolutePosition().getValueAsDouble(),
                 state.angle.getRotations());
-        double state_rps = (state.speedMetersPerSecond / (drivevalues.m_wheel_diameter.in(Meters) * Math.PI)
+        double state_rps = (state.speedMetersPerSecond / (drivevalues.m_wheel_diameter * Math.PI)
                 * drivevalues.gear_ratio);
 
         double drive_speed = m_Drive_PID.calculate(m_Drive_Motor.getVelocity().getValueAsDouble(), state_rps);

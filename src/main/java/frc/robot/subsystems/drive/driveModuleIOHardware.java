@@ -68,9 +68,9 @@ public class driveModuleIOHardware implements driveModuleIO {
     inputs.m_Drive_Motor_IO_Amps = m_Drive_Motor.getSupplyCurrent().getValueAsDouble();
     inputs.m_Drive_Motor_IO_Volts = m_Drive_Motor.getMotorVoltage().getValueAsDouble();
     inputs.m_Drive_Motor_IO_Distance = ((m_Drive_Motor.getPosition().getValueAsDouble() / drivevalues.gear_ratio)
-        * drivevalues.m_wheel_diameter.in(Meters) * Math.PI);
+        * drivevalues.m_wheel_diameter * Math.PI);
     inputs.m_Drive_Motor_IO_Meters_Per_Second = ((m_Drive_Motor.getVelocity().getValueAsDouble()
-        / drivevalues.gear_ratio) * drivevalues.m_wheel_diameter.in(Meters) * Math.PI);
+        / drivevalues.gear_ratio) * drivevalues.m_wheel_diameter * Math.PI);
 
     inputs.m_Steer_Motor_IO_Amps = m_Steer_Motor.getOutputCurrent();
     inputs.m_Steer_Motor_IO_Volts = m_Steer_Motor.getBusVoltage() * m_Steer_Motor.getAppliedOutput();
@@ -79,7 +79,7 @@ public class driveModuleIOHardware implements driveModuleIO {
 
     inputs.time = new double[] { Logger.getTimestamp() };
     inputs.drive_Difference = new double[] { (m_Drive_Motor.getPosition().getValueAsDouble() / drivevalues.gear_ratio)
-        * drivevalues.m_wheel_diameter.in(Meters) * Math.PI
+        * drivevalues.m_wheel_diameter* Math.PI
     };
     inputs.drive_Direction = new Rotation2d[] {
         Rotation2d.fromRotations(m_Encoder.getAbsolutePosition().getValueAsDouble())

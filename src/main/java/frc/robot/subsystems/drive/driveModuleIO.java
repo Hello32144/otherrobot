@@ -7,10 +7,11 @@ package frc.robot.subsystems.drive;
 import org.littletonrobotics.junction.AutoLog;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.units.measure.AngularVelocity;
 
 public interface driveModuleIO {
   @AutoLog
-  public class driveLogger {
+  public static class driveLogger {
     public double m_Drive_Motor_IO_Meters_Per_Second = 0;
     public double m_Drive_Motor_IO_Volts = 0;
     public double m_Drive_Motor_IO_Amps = 0;

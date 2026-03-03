@@ -28,6 +28,6 @@ public static Translation2d m_Left_Front = new Translation2d(1,1);
 public static Translation2d m_Right_Back = new Translation2d(1,1);
 public static Translation2d m_Right_Front = new Translation2d(1,1);
 
-public static Distance m_wheel_diameter = Inches.of(2); //placeholder value
+public static double m_wheel_diameter = 2; //placeholder value
 public static double gear_ratio = 3; //placeholder value
 }
