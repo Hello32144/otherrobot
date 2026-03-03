@@ -9,6 +9,9 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.drive.drive;
+import frc.robot.subsystems.drive.driveIO;
+import frc.robot.subsystems.drive.driveIOSim;
+import frc.robot.subsystems.drive.driveModuleIO;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -21,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  private final drive m_drive = new drive();
+  private final driveIO m_drive;
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -31,7 +34,15 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the trigger bindings
+    m_drive = new driveIO(
+      new driveIOSim(),
+      new driveIOSim(),
+      new driveIOSim(),
+      new driveIOSim()
+    );
+
+
+
     configureBindings();
   }
 
@@ -50,12 +61,14 @@ public class RobotContainer {
   */
 
   private void configureBindings() {
+    /** 
     m_drive.setDefaultCommand(m_drive.run(()->{
     double y = MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1);
     double x = MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1);
     double Rotation = MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1);
     m_drive.driveRobot(x, y, Rotation);
   }));
+  */
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
