@@ -110,7 +110,11 @@ public class driveIO extends SubsystemBase {
       return false;
     }
   }
-
+public void alwaysPointX(Rotation2d target_x){
+  Rotation2d current_angle = m_gyro.getRotation2d();
+  double needed_speed = m_Heading_PID.calculate(current_angle.getDegrees(), target_x.getDegrees());
+  m_gyro.setYaw(needed_speed);
+}
   @Override
   public void periodic() {
     front_left_io.updateInputs(front_left_inputs);

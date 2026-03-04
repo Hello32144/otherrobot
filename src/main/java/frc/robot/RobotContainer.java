@@ -75,6 +75,9 @@ public class RobotContainer {
     }));
     m_driverController.a().onTrue(m_drive.runOnce(()->{m_drive.m_gyro.setYaw(0);}
     ));
+    m_drive.setDefaultCommand(m_drive.run(()->{
+      m_drive.alwaysPointX(Rotation2d.fromDegrees(45));
+    }));
   }
 
 
